@@ -22,6 +22,17 @@ public class DispatcherServiciosBean implements DispatcherServiciosLocal {
         System.out.println("HOLA");
     }
     
+    @WebMethod(operationName="consultaCantidad")
+    public int cosultarCantidadConsultas(String nombreServicio){
+        return 1;
+    }
+
+    @WebMethod(operationName="consultarServicio")
+    public String consultarServicio(String nombreServicio){
+        String retorno = "[Test]";
+
+        return retorno;
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method" or "Web Service > Add Operation")
 
