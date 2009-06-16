@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xalan="http://xml.apache.org/xslt" xmlns:ejbjarproject2="http://www.netbeans.org/ns/j2ee-ejbjarproject/2" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+    <!--
+                ===================
+                JAX-WS WSGEN SECTION
+                ===================
+            -->
+    <target name="wsgen-init" depends="init">
+        <mkdir dir="${build.generated.dir}/wsgen/service"/>
+        <mkdir dir="${build.generated.dir}/wsgen/service/resources/"/>
+        <mkdir dir="${build.generated.dir}/wsgen/binaries"/>
+        <taskdef name="wsgen" classname="com.sun.tools.ws.ant.WsGen">
+            <classpath path="${j2ee.platform.wsgen.classpath}"/>
+        </taskdef>
+    </target>
+    <target name="wsgen-compile" depends="wsgen-DispachadorClienteWebServiceBean, wsgen-DispachadorProovedorWebServiceBean">
+        <ejbjarproject2:javac srcdir="${build.generated.dir}/wsgen/service" classpath="${j2ee.platform.wsgen.classpath}:${javac.classpath}" destdir="${classes.dir}"/>
+    </target>
+    <target name="wsgen-DispachadorClienteWebServiceBean" depends="wsgen-init, -do-compile">
+        <wsgen destdir="${build.generated.dir}/wsgen/binaries" sourcedestdir="${build.generated.dir}/wsgen/service" resourcedestdir="${build.generated.dir}/wsgen/service/resources/" xendorsed="true" keep="false" genwsdl="true" sei="uy.edu.ort.arq.obligatorio.miws.DispachadorClienteWebServiceBean">
+            <classpath path="${java.home}/../lib/tools.jar:${classes.dir}:${j2ee.platform.wsgen.classpath}:${javac.classpath}"/>
+        </wsgen>
+    </target>
+    <target name="wsgen-DispachadorProovedorWebServiceBean" depends="wsgen-init, -do-compile">
+        <wsgen destdir="${build.generated.dir}/wsgen/binaries" sourcedestdir="${build.generated.dir}/wsgen/service" resourcedestdir="${build.generated.dir}/wsgen/service/resources/" xendorsed="true" keep="false" genwsdl="true" sei="uy.edu.ort.arq.obligatorio.miws.DispachadorProovedorWebServiceBean">
+            <classpath path="${java.home}/../lib/tools.jar:${classes.dir}:${j2ee.platform.wsgen.classpath}:${javac.classpath}"/>
+        </wsgen>
+    </target>
+    <!--
+                ===================
+                JAX-WS WSIMPORT SECTION
+                ===================
+            -->
+    <target name="wsimport-init" depends="init">
+        <mkdir dir="${build.generated.dir}/wsimport/client"/>
+        <mkdir dir="${build.generated.dir}/wsimport/binaries"/>
+        <mkdir dir="${classes.dir}"/>
+        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+            <classpath path="${j2ee.platform.wsimport.classpath}"/>
+        </taskdef>
+    </target>
+    <target name="wsimport-client-check-NewTemperaturaWebServiceService" depends="wsimport-init">
+        <condition property="wsimport-client-NewTemperaturaWebServiceService.notRequired">
+            <available file="${build.generated.dir}/wsimport/client/uy/edu/ort/arq/webservice/NewTemperaturaWebServiceService.java"/>
+        </condition>
+    </target>
+    <target name="wsimport-client-NewTemperaturaWebServiceService" depends="wsimport-init,wsimport-client-check-NewTemperaturaWebServiceService" unless="wsimport-client-NewTemperaturaWebServiceService.notRequired">
+        <property name="wsdl-NewTemperaturaWebServiceService" location="${meta.inf}/xml-resources/web-service-references/NewTemperaturaWebServiceService/wsdl/localhost_8080/TemperaturaWS/NewTemperaturaWebServiceService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/wsimport/client" destdir="${build.generated.dir}/wsimport/binaries" wsdl="${wsdl-NewTemperaturaWebServiceService}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://localhost:8080/TemperaturaWS/NewTemperaturaWebServiceService?wsdl" xnocompile="true"/>
+    </target>
+    <target name="wsimport-client-clean-NewTemperaturaWebServiceService" depends="-init-project">
+        <delete dir="${build.generated.dir}/wsimport/client/uy/edu/ort/arq/webservice"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-NewTemperaturaWebServiceService"/>
+    <target name="wsimport-client-compile" depends="wsimport-client-generate">
+        <ejbjarproject2:javac srcdir="${build.generated.dir}/wsimport/client" classpath="${j2ee.platform.wsimport.classpath}:${javac.classpath}" destdir="${classes.dir}"/>
+        <copy todir="${classes.dir}">
+            <fileset dir="${build.generated.dir}/wsimport/binaries" includes="**/*.xml"/>
+        </copy>
+    </target>
+</project>

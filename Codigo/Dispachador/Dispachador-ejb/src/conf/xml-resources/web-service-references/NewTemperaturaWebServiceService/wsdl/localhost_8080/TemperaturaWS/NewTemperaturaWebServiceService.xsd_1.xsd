@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.3.1-hudson-749-SNAPSHOT. --><xs:schema xmlns:tns="http://webservice.arq.ort.edu.uy/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservice.arq.ort.edu.uy/">
+
+<xs:element name="pasarCelciusFarenheit" type="tns:pasarCelciusFarenheit"></xs:element>
+
+<xs:element name="pasarCelciusFarenheitResponse" type="tns:pasarCelciusFarenheitResponse"></xs:element>
+
+<xs:element name="pasarFarenheitCelsius" type="tns:pasarFarenheitCelsius"></xs:element>
+
+<xs:element name="pasarFarenheitCelsiusResponse" type="tns:pasarFarenheitCelsiusResponse"></xs:element>
+
+<xs:complexType name="pasarCelciusFarenheit">
+<xs:sequence>
+<xs:element name="celcius" type="xs:double" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pasarCelciusFarenheitResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pasarFarenheitCelsius">
+<xs:sequence>
+<xs:element name="farenheit" type="xs:double" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pasarFarenheitCelsiusResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
