@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/WSTemperatura/WSConvertirTemperaturaService?wsdl" uri="src/conf/xml-resources/web-service-references/WSConvertirTemperaturaService/wsdl/localhost_8080/WSTemperatura/WSConvertirTemperaturaService.wsdl"/>
+    <system systemId="http://localhost:8080/WSTemperatura/WSConvertirTemperaturaService?xsd=1" uri="src/conf/xml-resources/web-service-references/WSConvertirTemperaturaService/wsdl/localhost_8080/WSTemperatura/WSConvertirTemperaturaService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/TemperaturaWS/NewTemperaturaWebServiceService?wsdl" uri="src/conf/xml-resources/web-service-references/NewTemperaturaWebServiceService/wsdl/localhost_8080/TemperaturaWS/NewTemperaturaWebServiceService.wsdl"/>
+    <system systemId="http://localhost:8080/TemperaturaWS/NewTemperaturaWebServiceService?xsd=1" uri="src/conf/xml-resources/web-service-references/NewTemperaturaWebServiceService/wsdl/localhost_8080/TemperaturaWS/NewTemperaturaWebServiceService.xsd_1.xsd"/>
+</catalog>
