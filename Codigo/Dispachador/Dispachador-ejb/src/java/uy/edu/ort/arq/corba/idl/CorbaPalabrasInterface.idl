@@ -1,0 +1,15 @@
+module uy{
+    module edu{
+        module ort{
+            module arq{
+                module corba{
+                    module idl{
+                        interface CorbaPalabrasInterface{
+                            string convertirPalabra(in string palabra);
+                         };
+                    };
+                };
+            };
+        };
+    };
+};
