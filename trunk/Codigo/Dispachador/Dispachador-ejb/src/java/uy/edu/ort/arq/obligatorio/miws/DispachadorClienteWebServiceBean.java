@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import uy.edu.ort.arq.obligatorio.dominio.Servicios;
+import uy.edu.ort.arq.obligatorio.implementaciones.CobraPalabrasLocal;
 import uy.edu.ort.arq.obligatorio.implementaciones.WSTemperaturaLocal;
 import uy.edu.ort.arq.obligatorio.publicacion.PublicacionLocal;
 
@@ -42,7 +43,11 @@ public class DispachadorClienteWebServiceBean implements DispachadorClienteWebSe
     @EJB
     private PublicacionLocal publicar;
 
+    @EJB
+    private CobraPalabrasLocal cobraPalabra;
+
     private Object logicaNegocio(String nombre, String parametro) {
+        if(nombre.isEmpty() || parametro.isEmpty()) return null;
         Servicios s = new Servicios();
         s.setNombreServicio(nombre);
         List<Servicios> aux = publicar.listaServicioActivos();
@@ -59,8 +64,6 @@ public class DispachadorClienteWebServiceBean implements DispachadorClienteWebSe
             if (nombre.equalsIgnoreCase("temperaturaFarenheitToCelsius")) {
                 try {
                     double a = Double.parseDouble(parametro);
-                    System.out.println("Estoy aca");
-                    System.out.println(a);
                     return wsTemperatura.convertirCelsius(s, a);
                 } catch (Exception e) {
                     System.out.println("Error");
@@ -70,9 +73,16 @@ public class DispachadorClienteWebServiceBean implements DispachadorClienteWebSe
             if (nombre.equalsIgnoreCase("temperaturaCelsiusToFarenheit")) {
                 try {
                     double a = Double.parseDouble(parametro);
-                    System.out.println("Estoy aca");
-                    System.out.println(a);
                     return wsTemperatura.convertirFarenheit(s, a);
+                } catch (Exception e) {
+                    System.out.println("Error");
+                    System.out.println("Error " + e.getMessage());
+                }
+            }
+
+            if (nombre.equalsIgnoreCase("ConvertirPalabra")) {
+                try {
+                    return cobraPalabra.modificarPalabra(s,parametro);
                 } catch (Exception e) {
                     System.out.println("Error");
                     System.out.println("Error " + e.getMessage());
@@ -83,7 +93,4 @@ public class DispachadorClienteWebServiceBean implements DispachadorClienteWebSe
         return null;
     }
 
-    
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method" or "Web Service > Add Operation")
 }
